@@ -19,6 +19,7 @@ $(readyNow);
 function readyNow() {
     console.log('JQ');
     $('#employeeInBtn').on('click', submitEmployee);
+    $('#tableBody').on('click', '#deleteRow', removeEmployee);
 
 
     function submitEmployee() {
@@ -38,7 +39,7 @@ function readyNow() {
 
             for (let employee of employeeGroup){ 
                 employeeOut.append(
-                    `<tr>
+                    `<tr id="tableRow">
                         <td>` + employee.firstName + `</td>
                         <td>` + employee.lastName + `</td>
                         <td>` + employee.id + `</td>
@@ -58,8 +59,16 @@ function readyNow() {
 
                 monthlyCost += monthlySal
             }  
+            $('#employeeFoot').html(`<td id="totalCost">Monthly Cost:` + monthlyCost.toFixed(2) +`</td>`);
             console.log(monthlyCost);
+            if (monthlyCost.toFixed(2) > 20000){
+                $('#totalCost').css({'background-color': 'red', 'color': 'white'});
+            }
         }
+    }
+
+    function removeEmployee(){
+        $(this).remove();
     }
 }
 
@@ -67,6 +76,6 @@ function readyNow() {
 
 
 
-
-
+// Notes/ideas:
+// use jQ to assign each employee.Id to the table row ID as the row is created  <tr id="`employee.id`">
 // delete button last column in a row, make a function to delete parent
