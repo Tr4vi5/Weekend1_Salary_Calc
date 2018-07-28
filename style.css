@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #363E49;
+    color: #aa9d8a;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+#masterContainer{
+    display: grid;
+    background-color: #434B56;
+    width: 960px;
+    height: 100vh;
+    margin:auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr 1fr;
+    grid-template-areas: 
+    "headCont headCont headCont headCont headCont headCont"
+    "inputCont inputCont inputCont inputCont inputCont inputCont"
+    ". tableCont tableCont tableCont tableCont ."
+    "salCont salCont salCont salCont salCont salCont"
+    ;
+}
+
+
+/* Header content styles start */
+#headContent{
+    grid-area: headCont;
+    height: 150px;
+    color: rgb(202, 204, 207);
+    background-color: #827563;
+    text-align: center;
+    text-shadow: 1px 1px 1px  black;
+}
+
+#headContent h1{
+    margin: 40px;
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+/* Header content styles end */
+
+
+
+/* Input styles start */
+#inputContent{
+    grid-area: inputCont;
+}
+
+#inputContent input{
+    width: 15%; 
+    
+}
+/* Input styles end */
+
+
+
+/* Table styles start */
+#tableContent{
+    grid-area: tableCont;
+}
+
+#tableContent table{
+    width: 100%;
+    background-color: #363E49;
+    border: 1px black solid;
+}
+
+#tableContent tr{
+    border-bottom: 1px solid black;
+    border: 1px black solid;
+}
+
+#tableContent td{
+    background-color: whitesmoke;
+    border: 1px black solid;
+}
+/* Table styles end */
+
+
+
+/* Final salary styles start */
+#salaryContent{
+    grid-area: salCont;
+}
+/* Final salary styles end */
