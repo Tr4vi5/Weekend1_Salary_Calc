@@ -1,9 +1,5 @@
 console.log('JS');
 
-let employeeGroup = [];
-let monthlyCost = 0;
-
-
 class Employee{
     constructor(fName, lName, id, title, salary){
         this.firstName = fName;
@@ -14,12 +10,17 @@ class Employee{
     }// end constructor
 }// end employee class
 
+let employeeGroup = [];
+let monthlyCost = 0;
+
+// why is this not working?  employeeGroup.push(new Employee(Kurt, Vonnegut, 1234, Writer, 100000));
+
 $(readyNow);
 
 function readyNow() {
     console.log('JQ');
     $('#employeeInBtn').on('click', submitEmployee);
-    $('#tableBody').on('click', '#deleteRow', removeEmployee);
+    $('#employeeBody').on('click', '#deleteRow', removeEmployee);
 
 
     function submitEmployee() {
@@ -44,10 +45,10 @@ function readyNow() {
                         <td>` + employee.lastName + `</td>
                         <td>` + employee.id + `</td>
                         <td>` + employee.title + `</td>
-                        <td>` + employee.salary + `</td>
-                        <td id="deleteRow">X</td>
+                        <td id="indSalary">$` + employee.salary + `</td>
+                        <td id="deleteRow" style="background-color:red">X</td> 
                     </tr>`  
-                );
+                );  // Why was the external CSS for changing the background color of this row not working?
                 
                 $('#firstNameIn').val('');
                 $('#lastNameIn').val('');
@@ -55,12 +56,13 @@ function readyNow() {
                 $('#titleIn').val('');
                 $('#salaryIn').val('');
 
-                let monthlySal = employee.salary / 12;
+                let monthlySal = employee.salary / 12; 
 
-                monthlyCost += monthlySal
+                monthlyCost += monthlySal;
             }  
-            $('#employeeFoot').html(`<td id="totalCost">Monthly Cost:` + monthlyCost.toFixed(2) +`</td>`);
+            $('#employeeFoot').html(`<td id="totalCost" colspan="5">Monthly Cost: $` + monthlyCost.toFixed(2) +`</td>`); //why did this colspan only work inline? Similar to issue with the #deleteRow button
             console.log(monthlyCost);
+
             if (monthlyCost.toFixed(2) > 20000){
                 $('#totalCost').css({'background-color': 'red', 'color': 'white'});
             }
@@ -68,7 +70,7 @@ function readyNow() {
     }
 
     function removeEmployee(){
-        $(this).remove();
+        $(this).closest('#tableRow').remove();
     }
 }
 
@@ -78,4 +80,3 @@ function readyNow() {
 
 // Notes/ideas:
 // use jQ to assign each employee.Id to the table row ID as the row is created  <tr id="`employee.id`">
-// delete button last column in a row, make a function to delete parent

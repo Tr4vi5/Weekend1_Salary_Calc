@@ -6,7 +6,7 @@
 
 body{
     background-color: #363E49;
-    color: #aa9d8a;
+    color: white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
@@ -17,7 +17,7 @@ body{
     height: 100vh;
     margin:auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 4fr 1fr;
+    grid-template-rows: 1fr 40px 4fr 1fr;
     grid-template-areas: 
     "headCont headCont headCont headCont headCont headCont"
     "inputCont inputCont inputCont inputCont inputCont inputCont"
@@ -31,7 +31,7 @@ body{
 #headContent{
     grid-area: headCont;
     height: 150px;
-    color: rgb(202, 204, 207);
+    color: rgb(252, 252, 252);
     background-color: #827563;
     text-align: center;
     text-shadow: 1px 1px 1px  black;
@@ -51,9 +51,10 @@ body{
     grid-area: inputCont;
 }
 
-#inputContent input{
-    width: 15%; 
-    
+#nestedInputs{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    height: 100%;
 }
 /* Input styles end */
 
@@ -62,12 +63,19 @@ body{
 /* Table styles start */
 #tableContent{
     grid-area: tableCont;
+    margin-top: 20px;
 }
 
 #tableContent table{
     width: 100%;
     background-color: #363E49;
     border: 1px black solid;
+    border-collapse: collapse;
+}
+
+#tableContent th{
+    background-color: #827563;
+    text-shadow: 1px 1px black;
 }
 
 #tableContent tr{
@@ -76,9 +84,32 @@ body{
 }
 
 #tableContent td{
+    color: black;
     background-color: whitesmoke;
-    border: 1px black solid;
+    border-right: 1px black solid;
+    border-bottom: 1px black solid;
+    padding: 1px;
 }
+
+table tr:nth-child(2){
+    background-color: #ccc;
+}
+
+table td:nth-child(6){
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+#indSalary{
+    text-align: right;
+}
+
+#totalCost{
+    text-align: right;
+    background-color: #363E49;
+}
+
 /* Table styles end */
 
 

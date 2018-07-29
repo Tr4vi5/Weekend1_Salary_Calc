@@ -16,12 +16,14 @@
         </div>
 
         <div id="inputContent">
-            <input id="firstNameIn" placeholder="First Name"/>
-            <input id="lastNameIn" placeholder="Last Name"/>
-            <input id="employeeIDIn" placeholder="ID Number"/>
-            <input id="titleIn" placeholder="Title"/>
-            <input id="salaryIn" placeholder="Salary"/>
-            <button id="employeeInBtn">Submit Employee</button>
+            <div id="nestedInputs">
+                <input id="firstNameIn" placeholder="First Name"/>
+                <input id="lastNameIn" placeholder="Last Name"/>
+                <input id="employeeIDIn" placeholder="ID Number"/>
+                <input id="titleIn" placeholder="Title"/>
+                <input id="salaryIn" placeholder="Salary"/>
+                <button id="employeeInBtn">Submit Employee</button>
+            </div>  
         </div>
 
         <div id="tableContent">
@@ -40,7 +42,7 @@
                     <!-- Employee rows append here -->
                 </tbody>
                 <tfoot id="employeeFoot">
-                    <td id="totalCost">Monthly Cost:</td>
+                    <td id="totalCost" colspan="5">Monthly Cost: $0</td>
                 </tfoot>
             </table>
         </div>
