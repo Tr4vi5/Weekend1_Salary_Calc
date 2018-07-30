@@ -91,7 +91,7 @@ body{
     padding: 1px;
 }
 
-table tr:nth-child(2){
+#tableContent tr:nth-child(odd){
     background-color: #ccc;
 }
 

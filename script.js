@@ -48,7 +48,10 @@ function readyNow() {
                         <td id="indSalary">$` + employee.salary + `</td>
                         <td id="deleteRow" style="background-color:red">X</td> 
                     </tr>`  
-                );  // Why was the external CSS for changing the background color of this row not working?
+                );  // Why was the external CSS for changing the background color of #deleteRow not working?
+                
+                $('tr').data('sal', employee.salary);
+                console.log($('tr').data('sal'));
                 
                 $('#firstNameIn').val('');
                 $('#lastNameIn').val('');
@@ -70,6 +73,8 @@ function readyNow() {
     }
 
     function removeEmployee(){
+        console.log($(this).data(sal));
+        
         $(this).closest('#tableRow').remove();
     }
 }
