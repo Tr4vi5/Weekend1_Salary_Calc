@@ -90,11 +90,11 @@ body{
     border-bottom: 1px black solid;
     padding: 1px;
 }
-
+/*  Neither of these are working for some reason
 #tableContent tr:nth-child(odd){
     background-color: #ccc;
 }
-
+*/
 table td:nth-child(6){
     background-color: red;
     color: white;

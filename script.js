@@ -40,10 +40,10 @@ function readyNow() {
 
             for (let employee of employeeGroup){ 
                 employeeOut.append(
-                    `<tr id="tableRow">
+                    `<tr class="tableRow">
                         <td>` + employee.firstName + `</td>
                         <td>` + employee.lastName + `</td>
-                        <td>` + employee.id + `</td>
+                        <td id="`+ employee.id +`">` + employee.id + `</td>
                         <td>` + employee.title + `</td>
                         <td id="indSalary">$` + employee.salary + `</td>
                         <td id="deleteRow" style="background-color:red">X</td> 
@@ -72,16 +72,18 @@ function readyNow() {
         }
     }
 
+    // any time that I added any of the commented out code below, it stopped the function from removing the row from the DOM, why is this?
     function removeEmployee(){
-        console.log($(this).data(sal));
-        
         $(this).closest('#tableRow').remove();
+        /* let index = $(this).closest('td').parent()[0].sectionRowIndex
+        
+        employeeGroup.splice(index, 1);*/
+
+        /* monthlyCost -= ($(this).closest('tr').data('sal') / 12);
+        $('#employeeFoot').html(`<td id="totalCost" colspan="5">Monthly Cost: $` + monthlyCost.toFixed(2) + `</td>`);*/
+        /* monthlyCost = 0; */
     }
 }
-
-
-
-
 
 // Notes/ideas:
 // use jQ to assign each employee.Id to the table row ID as the row is created  <tr id="`employee.id`">
