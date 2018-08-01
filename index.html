@@ -11,34 +11,40 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <div id="container">
-        <h1>Salary Calculation</h1>
+    <div class="container">
+        <h1 class="jumbotron">Salary Calculation</h1>
 
-        <input id="first-name" value="New"/>
-        <input id="last-name" value="Guy"/>
-        <input id="employee-id" value="0000"/>
-        <input id="title" value="FNG"/>
-        <input id="salary" value="0"/>
-        <button id="employee-grab">Submit</button>
+        <form>
+            <input id="first-name" placeholder="First Name" value="New"/>
+            <input id="last-name" placeholder="Last Name" value="Guy"/>
+            <input id="employee-id" placeholder="Employee ID" value="0000"/>
+            <input id="title" placeholder="Title" value="FNG"/>
+            <input id="salary" placeholder="Salary" value="0"/>
+            <button id="employee-grab" class="">Submit</button>
+        </form>
         <p id="error-message"></p>
 
+        <div id="table-content">
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Salary</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="employee-list">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Salary</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody id="employee-list">
+                </tbody>
+            </table>
+        </div>
 
-            </tbody>
-        </table>
-        <h1 id="monthly-cost">Monthly Costs: $0</h1>
+        <div id="output-div">
+            <h1 id="monthly-cost">Monthly Costs: $0</h1>
+        </div>
     </div>
 </body>
 </html>

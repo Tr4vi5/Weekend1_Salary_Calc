@@ -11,9 +11,9 @@ class Employee{
 }
 
 let employeeGroup = [
-    new Employee('Travis','Dunn','1234','Junior Developer','120000'),
-    new Employee('Kurt', 'Vonnegut', '5678', 'Writer', '120000'),
-    new Employee('Mark', 'Zuckerberg', '666', 'Robot', '0')
+    new Employee('Travis','Dunn','1234','Junior Developer','60000'),
+    new Employee('Kurt', 'Vonnegut', '5678', 'Writer', '70000'),
+    new Employee('Lao', 'Tzu', '7890', 'Philosopher', '50000')
 ];
 
 let monthlyCost = 0;
@@ -22,6 +22,7 @@ $(readyNow);
 
 function readyNow() {
     console.log('JQ');
+    appendArrayToDom()
     // Event Handlers
     $('#employee-grab').on('click', newEmployee);
     $('#employee-list').on('click', '.remove-btn', removeEmployee);
@@ -37,8 +38,9 @@ function readyNow() {
             employeeGroup.push(new Employee(fName, lName, eId, eTitle, eSalary));
             clearInputs();
             appendArrayToDom();
+            $('#error-message').empty();
         } else {
-            $('#error-message').text('Please correctly enter employeee information.')
+            $('#error-message').text('Please correctly enter employee information.')
         }
     }
 
@@ -55,13 +57,13 @@ function readyNow() {
 
         for (let employee of employeeGroup){
             $('#employee-list').append(`
-                <tr data-index="` + employee.id + `">
+                <tr class="table-row" data-index="` + employee.id + `">
                     <td>` + employee.firstName + `</td>
                     <td>` + employee.lastName + `</td>
                     <td>` + employee.id + `</td>
                     <td>` + employee.title + `</td>
                     <td>` + employee.salary + `</td>
-                    <td><button class="remove-btn">Remove</button></td>
+                    <td class="remove-column"><button class="remove-btn btn btn-warning">Remove</button></td>
                 </tr>`
             );
         }
@@ -83,17 +85,12 @@ function readyNow() {
         }
     }
 
-    function removeEmployee(/*index*/){
-        // employeeGroup.splice(index, 1);
-        // appendArrayToDom();
+    function removeEmployee(){
         for (let i=0; i < employeeGroup.length; i++){
             if ($(this).closest('tr').data('index') == employeeGroup[i].id){
                 employeeGroup.splice(i, 1);
             }
         }
-    }
-
-    function updateDOM(){
-        // removeEmployee($(this).data(index));
+        appendArrayToDom();
     }
 }

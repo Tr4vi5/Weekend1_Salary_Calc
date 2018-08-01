@@ -1,4 +1,60 @@
-.errorRed{
-    background-color: red;
+body{
+    background-color: #787778;
+}
+
+table{
+    width: 100%;
+    border-radius: 1em;
+}
+
+th{
+    background-color: rgb(5, 0, 32);
+} 
+
+p{
+    text-align: center;
+    color: red;
+}
+
+.jumbotron{
+    background-color: rgb(5, 0, 32);
     color: white;
+    margin-bottom: 15px;
+}
+
+.container{
+    height: auto;
+    width: 990px;
+    margin: auto;
+    background-color: #ccc;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 1em; 
+}
+
+.remove-column{
+    /* justify-content: right; */
+}
+
+.remove-btn{
+    /* align-self: right; */
+}
+
+.errorRed{
+    color: red;
+}
+
+#table-content{
+    width: 100%;
+}
+
+#output-div{
+    margin: 20px;
+}
+
+#monthly-cost{
+    text-align: right;
 }
