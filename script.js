@@ -1,89 +1,99 @@
 console.log('JS');
 
 class Employee{
-    constructor(fName, lName, id, title, salary){
-        this.firstName = fName;
-        this.lastName = lName;
-        this.id = id;
-        this.title = title;
-        this.salary = salary;
-    }// end constructor
-}// end employee class
+ constructor(firstName, lastName, employeeId, employeeTitle, employeeSalary){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.id = employeeId;
+    this.title = employeeTitle;
+    this.salary = employeeSalary;
+ }
+}
 
-let employeeGroup = [];
+let employeeGroup = [
+    new Employee('Travis','Dunn','1234','Junior Developer','120000'),
+    new Employee('Kurt', 'Vonnegut', '5678', 'Writer', '120000'),
+    new Employee('Mark', 'Zuckerberg', '666', 'Robot', '0')
+];
+
 let monthlyCost = 0;
-
-// why is this not working?  employeeGroup.push(new Employee(Kurt, Vonnegut, 1234, Writer, 100000));
 
 $(readyNow);
 
 function readyNow() {
     console.log('JQ');
-    $('#employeeInBtn').on('click', submitEmployee);
-    $('#employeeBody').on('click', '#deleteRow', removeEmployee);
+    // Event Handlers
+    $('#employee-grab').on('click', newEmployee);
+    $('#employee-list').on('click', '.remove-btn', removeEmployee);
+    
+    function newEmployee(){
+        let fName = $('#first-name').val();
+        let lName = $('#last-name').val();
+        let eId = $('#employee-id').val();
+        let eTitle = $('#title').val();
+        let eSalary = $('#salary').val();
 
+        if (fName != '' && lName != '' && eId != '' && eTitle != '' && eSalary != '') {
+            employeeGroup.push(new Employee(fName, lName, eId, eTitle, eSalary));
+            clearInputs();
+            appendArrayToDom();
+        } else {
+            $('#error-message').text('Please correctly enter employeee information.')
+        }
+    }
 
-    function submitEmployee() {
-        let firstName = $('#firstNameIn').val();
-        let lastName = $('#lastNameIn').val();
-        let id = parseInt($('#employeeIDIn').val());
-        let title = $('#titleIn').val();
-        let salary = parseInt($('#salaryIn').val());
+    function clearInputs() {
+        $('#first-name').val('');
+        $('#last-name').val('');
+        $('#employee-id').val('');
+        $('#title').val('');
+        $('#salary').val('');
+    }
 
-        if (firstName != '' && lastName !='' && id !='' && title !='' && salary !=''){
-           
-            employeeGroup.push( new Employee(firstName, lastName, id, title, salary));
-            
-            let employeeOut = $('#employeeBody');
-            employeeOut.empty();
-            monthlyCost = 0;
+    function appendArrayToDom(){
+        $('#employee-list').empty();
 
-            for (let employee of employeeGroup){ 
-                employeeOut.append(
-                    `<tr class="tableRow">
-                        <td>` + employee.firstName + `</td>
-                        <td>` + employee.lastName + `</td>
-                        <td id="`+ employee.id +`">` + employee.id + `</td>
-                        <td>` + employee.title + `</td>
-                        <td id="indSalary">$` + employee.salary + `</td>
-                        <td id="deleteRow" style="background-color:red">X</td> 
-                    </tr>`  
-                );  // Why was the external CSS for changing the background color of #deleteRow not working?
-                
-                $('tr').data('sal', employee.salary);
-                console.log($('tr').data('sal'));
-                
-                $('#firstNameIn').val('');
-                $('#lastNameIn').val('');
-                $('#employeeIDIn').val('');
-                $('#titleIn').val('');
-                $('#salaryIn').val('');
+        for (let employee of employeeGroup){
+            $('#employee-list').append(`
+                <tr data-index="` + employee.id + `">
+                    <td>` + employee.firstName + `</td>
+                    <td>` + employee.lastName + `</td>
+                    <td>` + employee.id + `</td>
+                    <td>` + employee.title + `</td>
+                    <td>` + employee.salary + `</td>
+                    <td><button class="remove-btn">Remove</button></td>
+                </tr>`
+            );
+        }
+        salaryCalculation();
+        $('#monthly-cost').text('Monthly Costs: $' + monthlyCost.toFixed(2));
+       
+    }
 
-                let monthlySal = employee.salary / 12; 
+    function salaryCalculation(){
+        monthlyCost = 0;
+        for (let employee of employeeGroup){
+            monthlyCost += employee.salary / 12;
+        }
+        if (monthlyCost > 20000){
+            $('#monthly-cost').addClass('errorRed');
+            return monthlyCost;
+        } else {
+            return monthlyCost;
+        }
+    }
 
-                monthlyCost += monthlySal;
-            }  
-            $('#employeeFoot').html(`<td id="totalCost" colspan="5">Monthly Cost: $` + monthlyCost.toFixed(2) +`</td>`); //why did this colspan only work inline? Similar to issue with the #deleteRow button
-            console.log(monthlyCost);
-
-            if (monthlyCost.toFixed(2) > 20000){
-                $('#totalCost').css({'background-color': 'red', 'color': 'white'});
+    function removeEmployee(/*index*/){
+        // employeeGroup.splice(index, 1);
+        // appendArrayToDom();
+        for (let i=0; i < employeeGroup.length; i++){
+            if ($(this).closest('tr').data('index') == employeeGroup[i].id){
+                employeeGroup.splice(i, 1);
             }
         }
     }
 
-    // any time that I added any of the commented out code below, it stopped the function from removing the row from the DOM, why is this?
-    function removeEmployee(){
-        $(this).closest('#tableRow').remove();
-        /* let index = $(this).closest('td').parent()[0].sectionRowIndex
-        
-        employeeGroup.splice(index, 1);*/
-
-        /* monthlyCost -= ($(this).closest('tr').data('sal') / 12);
-        $('#employeeFoot').html(`<td id="totalCost" colspan="5">Monthly Cost: $` + monthlyCost.toFixed(2) + `</td>`);*/
-        /* monthlyCost = 0; */
+    function updateDOM(){
+        // removeEmployee($(this).data(index));
     }
 }
-
-// Notes/ideas:
-// use jQ to assign each employee.Id to the table row ID as the row is created  <tr id="`employee.id`">
